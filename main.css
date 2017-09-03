@@ -1,0 +1,281 @@
+body {
+    margin: 0px;
+}
+
+h1 {
+    font-family: 'Slabo 27px', serif;
+    font-weight: normal;
+}
+
+.container {
+    width: 960px;
+    margin: auto;
+}
+
+.title {
+    padding: 10px;
+    background: rgb(250, 250, 250);
+}
+
+.title h1 {
+    margin: 0px;
+}
+.titleLeft{
+    float: left;
+}
+.titleRight{
+    float: right;
+    font-size: 32px;
+    color: #a7a7a7;
+    margin-right: 12px;
+    margin-top: 8px;
+}
+
+
+.quickaddForm {
+
+    padding: 10px;
+    background: white;
+    display: none;
+    position: fixed;
+    text-align: center;
+    width: 250px;
+    height: fit-content;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -125px;
+    z-index: 2;
+    border-radius: 2px;
+
+}
+
+.quickaddForm label {
+    display: inline-block;
+    width: 165px;
+    height: 10px;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    float: left;
+}
+
+.quickaddForm input, textarea {
+    border:1px solid #aaa;
+    box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+    border-radius:5px;
+    margin-top: 5px;
+    width: 65%;
+    padding: 10px;
+    float: left;
+
+}
+
+.quickaddForm input:focus, textarea:focus {
+    background: #fff;
+    border:1px solid #555;
+    box-shadow: 0 0 3px #aaa;
+
+}
+
+
+#Add, #Cancel {
+    padding: 10px;
+    margin: 20px;
+    left: 385px;
+    border:1px solid #aaa;
+    box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+    border-radius:5px;
+    font-weight: bold;
+}
+
+.bgBlack {
+    background-color: black;
+    height: 100%;
+    position: fixed;
+    width:100%;
+    top:0;
+    left:0;
+    opacity: 0.9;
+    z-index: 1;
+    display: none;
+}
+
+#AddMail, #AddPhone {
+    border:1px solid #aaa;
+    border-radius:30px;
+    font-weight: bold;
+    padding: 3.5px 8px 2px 8px;
+    margin: 19px 0 0 0 ;
+    font-size: 20px;
+
+}
+
+#AddMail{
+    margin-top: 123px;
+}
+
+.firstRow {
+
+    background: #788DE6;
+    width: 960px;
+    height: 40px;
+    border-bottom: 1px solid;
+}
+
+.firstRow li {
+    list-style-type: none;
+    display: inline-block;
+    width: 15%;
+    float: left;
+    padding: 11px;
+}
+.entry {
+    background: rgb(230, 230, 230);
+    width: 960px;
+    height: 40px;
+    border-radius: 3px;
+    margin-top: 2px;
+    font-family: 'Droid Serif', serif;
+}
+
+.entry .name {
+    width: 14%;
+    float: left;
+    padding: 11px;
+}
+
+.entry .email {
+    width: 14%;
+    float: left;
+    padding: 11px;
+}
+
+.entry .phone {
+    width: 14%;
+    float: left;
+    padding: 11px;
+    margin-left: 90px;
+}
+
+.entry .address {
+    width: 14%;
+    float: left;
+    padding: 11px;
+}
+
+.entry .city {
+    width: 14%;
+    float: left;
+    padding: 11px;
+}
+
+.entry .del {
+    width: 30px;
+    margin-right: 2%;
+    float: right;
+    padding: 9px;
+}
+
+.entry p {
+    margin: 0px;
+    font-size: 13.5px;
+
+}
+
+.entry .del a {
+    color: #FFF;
+    font-size: 12px;
+    padding: 5px;
+    background: rgb(255, 100, 100);
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.widowDataContact {
+    padding: 10px;
+    background: white;
+    display: none;
+    position: fixed;
+    width: 55%;
+    height: fit-content;
+    top: 50%;
+    left: 30%;
+    margin: -250px 0 0 -125px;
+    z-index: 2;
+    border-radius: 2px;
+}
+
+
+
+.addFormPgone1 {
+    display: none;
+}
+.addFormMail1 {
+    display: none;
+}
+
+}
+.formTop {
+    display: inline-block;
+
+}
+.windowName {
+    text-align: left;
+    display: inline-block;
+    padding: 0 0 0 10px;
+}
+.iconForm {
+    float: right;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+.formBottom{
+
+}
+.formRight {
+    display: inline-block;
+    float: right;
+    text-align: left;
+    width: 75%;
+}
+.formRight p{
+    margin: 0;
+}
+.formLeft {
+    display: inline-block;
+    float: left;
+    text-align: right;
+    width: 18.4%;
+}
+.formSeredina {
+    padding: 0 0 15px 10px;
+}
+.titleCentr {
+    display: inline-block;
+}
+
+.search {
+    float: right;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 6px;
+    background: #dddddd;
+    margin-left: 359px;
+    margin-top: 7px;
+}
+
+.widowDataSearch {
+    padding: 10px;
+    background: white;
+    display: none;
+    position: fixed;
+    width: 75%;
+    height: fit-content;
+    top: 22%;
+    left: 11.75%;
+    z-index: 2;
+    border-radius: 3px;
+}
