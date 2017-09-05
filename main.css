@@ -41,9 +41,8 @@ h1 {
     text-align: center;
     width: 250px;
     height: fit-content;
-    top: 50%;
-    left: 50%;
-    margin: -250px 0 0 -125px;
+    top: 15%;
+    left: 39%;
     z-index: 2;
     border-radius: 2px;
 
@@ -198,18 +197,15 @@ h1 {
     position: fixed;
     width: 55%;
     height: fit-content;
-    top: 50%;
-    left: 30%;
-    margin: -250px 0 0 -125px;
+    top: 27%;
+    left: 22%;
     z-index: 2;
     border-radius: 2px;
 }
 
 
 
-.addFormPgone1 {
-    display: none;
-}
+
 .addFormMail1 {
     display: none;
 }

@@ -4,14 +4,8 @@
     var cancelBtn = document.getElementById('Cancel');
     // Form Fields
     var fullname = document.getElementById('fullname');
-    var phone = document.getElementById('phone');
-    var phone1 = document.getElementById('phone1');
-    var phone2 = document.getElementById('phone2');
     var address = document.getElementById('address');
     var city = document.getElementById('city');
-    var email = document.getElementById('email');
-    var email1 = document.getElementById('email1');
-    var email2 = document.getElementById('email2');
 
     // Divs etc.
     
@@ -21,7 +15,6 @@
     // Storage Array
     var addressBook = [];
     var serchResArr;
-
 
     function show(state){       
             document.querySelector('.bgBlack').style.display = state;
@@ -39,15 +32,40 @@
     }
 
 
-    function addFormPhone() {
-            document.querySelector('.addFormPgone1').style.display = 'block';
-    }
-
-     function addFormMail() {
-            document.querySelector('.addFormMail1').style.display = 'block';
-    }
-
     
+    let xs = 0; //couners
+    let xd = 0;
+
+    let phoneAddBtn = document.getElementById('AddPhone');
+
+    phoneAddBtn.addEventListener("click", function () {
+        var addPhone = document.getElementById('additionalPhone');
+        xs++;
+        if (xs < 5) {
+            let newdiv = document.createElement('div');
+            newdiv.innerHTML = '<input type="text" class="formFields, phoneForms"> <br>';
+            addPhone.appendChild(newdiv);
+        }
+        else {
+            alert('2social4me');
+        }
+
+    });
+
+    let addMailBtn = document.getElementById('AddMail');
+
+    addMailBtn.addEventListener("click", function () {
+        let addMail = document.getElementById('additionalMail');
+        xd++;
+        if (xd < 5) {
+            let newdivMail = document.createElement('div');
+            newdivMail.innerHTML = '<input type="text" class="formFields, emailForms1"><br>';
+            addMail.appendChild(newdivMail);
+        }
+        else {
+            alert('2social4me');
+        }
+    });
 
         function compareName(a, s) {
             if (a.fullname > s.fullname) {
@@ -99,17 +117,13 @@
     });
 
 
-    function jsonStructure(fullname, phone, phone1, phone2, address, city, email, email1, email2) {
+    function jsonStructure(idContact, fullname, phone, address, city, email) {
+        this.idContact = idContact;
         this.fullname = fullname;
         this.phone = phone;
-        this.phone1 = phone1;
-        this.phone2 = phone2;
         this.address = address;
         this.city = city;
-        this.email = email;
-        this.email1 = email1;
-        this.email2 = email2;
-        
+        this.email = email;  
     }
 
     function windowContact(n) {
@@ -134,13 +148,13 @@
                 sts += '</div>';
                 sts += '<div class="formRight">';
                 sts += '<div class="windowPhone"><p>' + addressBook[n].phone + '</p> </div>';
-                sts += '<div class="windowPhone1"><p>' + addressBook[n].phone1 + '</p></div>';
-                sts += '<div class="windowPhone2"><p>' + addressBook[n].phone2 + '</p></div>';
+                // sts += '<div class="windowPhone1"><p>' + addressBook[n].phone1 + '</p></div>';
+                // sts += '<div class="windowPhone2"><p>' + addressBook[n].phone2 + '</p></div>';
                 sts += '<div class="windowCity"><p>' + addressBook[n].city + '</p></div>';
                 sts += '<div class="windowAddress"><p>' + addressBook[n].address + '</p></div>';
                 sts += '<div class="windowEmail"><p>' + addressBook[n].email + '</p></div>';
-                sts += '<div class="windowEmail1"><p>' + addressBook[n].email1 + '</p></div>';
-                sts += '<div class="windowEmail2"><p>' + addressBook[n].email2 + '</p></div>';
+                // sts += '<div class="windowEmail1"><p>' + addressBook[n].email1 + '</p></div>';
+                // sts += '<div class="windowEmail2"><p>' + addressBook[n].email2 + '</p></div>';
                 sts += '</div>';
                 sts += '<div class="formLeft">';
                 sts += '<div class="windowLeftPhone">Phone <i class="fa fa-phone" aria-hidden="true"></i></div>';
@@ -163,7 +177,16 @@
         }
 
 
-
+    }
+    
+    let idContact = 0;
+    function generatorId() {
+        if (addressBook.length == 0) {
+            idContact = 1;
+        }
+        else {
+            idContact = addressBook[addressBook.length - 1].idContact + 1;
+        }
     }
 
 
@@ -176,15 +199,28 @@
     }
 
 
+    let phoneForms = document.getElementsByClassName('phoneForms');
+    let emailForms2 = document.getElementsByClassName('emailForms1');
     function addToBook() {
+        
         let isNull = fullname.value != '' && phone.value != '';
         if (isNull) {
-            // format the input into a valid JSON structure ( phone1.value, phone2.value, phone3.value, phone4.value, phone5.value,  )
-            let obj = new jsonStructure(fullname.value, phone.value, phone1.value, phone2.value, address.value, city.value, email.value, email1.value, email2.value);
+            let phone = [];
+            for (i = 0; i < phoneForms.length; i++) {
+                phone.push(phoneForms[i].value);
+            }
+
+            let email = [];
+            for (j = 0; j < emailForms2.length; j++) {
+                email.push(emailForms2[j].value);
+            }
+
+            let obj = new jsonStructure(idContact, fullname.value, phone, address.value, city.value, email);
             addressBook.push(obj);
             localStorage['addbook'] = JSON.stringify(addressBook);
             show('none')
             clearForm();
+
             showAddressBook();
         }
     }
@@ -205,7 +241,15 @@
     function clearForm() {
         let formFields = document.querySelectorAll('.formFields');
         for (let i in formFields) {
-            formFields[i].value = '';
+            formFields[i].value = '';  
+        }
+        let phoneForms1 = document.getElementsByClassName('phoneForms');
+        for (let i in phoneForms1) {
+            phoneForms1[i].value = '';  
+        }
+        let emailForms3 = document.getElementsByClassName('emailForms1');
+        for (let i in emailForms3) {
+            emailForms3[i].value = '';  
         }
     }
 
@@ -220,11 +264,11 @@
             
             for (let n in addressBook) {
                 let str = '<div class="entry">';
-                str += '<div onclick = "windowContact(' + n + ')" > <div class="phone"><p>' + addressBook[n].phone + '</p></div>';
+                str += '<div onclick = "windowContact(' + n + ')" > <div class="phone"><p>' + addressBook[n].phone[0] + '</p></div>';
                 str += '<div class="name"><p>' + addressBook[n].fullname + '</p></div>';
                 str += '<div class="city"><p>' + addressBook[n].city + '</p></div>';
                 str += '<div class="address"><p>' + addressBook[n].address + '</p></div>';
-                str += '<div class="email"><p>' + addressBook[n].email + '</p></div></div>';
+                str += '<div class="email"><p>' + addressBook[n].email[0] + '</p></div></div>';
                 str += '<div class="del"><a href="#" class="delbutton" data-id="' + n + '">Delete</a></div>';
                 str += '</div>';
                 addBookDiv.innerHTML += str;
@@ -275,11 +319,11 @@
         
 
         let stn =  '<div class="entry">';
-            stn += '<div onclick = "windowContact(' + n + ')" > <div class="phone"><p>' + serchResArr[n].phone + '</p></div>';
+            stn += '<div onclick = "windowContact(' + n + ')" > <div class="phone"><p>' + serchResArr[n].phone[0] + '</p></div>';
             stn += '<div class="name"><p>' + serchResArr[n].fullname + '</p></div>';
             stn += '<div class="city"><p>' + serchResArr[n].city + '</p></div>';
             stn += '<div class="address"><p>' + serchResArr[n].address + '</p></div>';
-            stn += '<div class="email"><p>' + serchResArr[n].email + '</p></div></div>';
+            stn += '<div class="email"><p>' + serchResArr[n].email[0] + '</p></div></div>';
             stn += '</div>';
             addSearch.innerHTML += stn;
 
