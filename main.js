@@ -18,7 +18,11 @@
 
     function show(state){       
             document.querySelector('.bgBlack').style.display = state;
-            document.querySelector('.quickaddForm').style.display = state;         
+            document.querySelector('.quickaddForm').style.display = state;
+            clearForm();
+            if (state == 'none') {
+                stel = 0;         
+            }
     }
 
     function show2(state2) {
@@ -38,34 +42,38 @@
 
     let phoneAddBtn = document.getElementById('AddPhone');
 
-    phoneAddBtn.addEventListener("click", function () {
+    phoneAddBtn.addEventListener("click", addPhoneF );
+
+    function addPhoneF() {
         var addPhone = document.getElementById('additionalPhone');
         xs++;
-        if (xs < 5) {
+        if (xs < 3) {
             let newdiv = document.createElement('div');
-            newdiv.innerHTML = '<input type="text" class="formFields, phoneForms"> <br>';
+            newdiv.innerHTML = '<input type="text" maxlength="12" class="formFields, phoneForms"> <br>';
             addPhone.appendChild(newdiv);
         }
         else {
             alert('2social4me');
         }
 
-    });
+    }
 
     let addMailBtn = document.getElementById('AddMail');
 
-    addMailBtn.addEventListener("click", function () {
+    addMailBtn.addEventListener("click", addMailF);
+
+    function addMailF() {
         let addMail = document.getElementById('additionalMail');
         xd++;
-        if (xd < 5) {
+        if (xd < 3) {
             let newdivMail = document.createElement('div');
-            newdivMail.innerHTML = '<input type="text" class="formFields, emailForms1"><br>';
+            newdivMail.innerHTML = '<input type="text"  class="formFields, emailForms1"><br>';
             addMail.appendChild(newdivMail);
         }
         else {
             alert('2social4me');
         }
-    });
+    }
 
         function compareName(a, s) {
             if (a.fullname > s.fullname) {
@@ -140,7 +148,7 @@
             let sts =  '<div class="windowContactContent">';
                 sts += '<div class="formTop">';
                 sts += '<div class="windowName"><h1> <i class="fa fa-id-card-o" aria-hidden="true"></i> ' + addressBook[n].fullname + ' </h1></div>';
-                sts += '<div class="iconForm"> <i class="fa fa-trash-o" onclick="remuveS(' + n + ')" aria-hidden="true"></i></div>';
+                sts += '<div class="iconForm"> <i class="fa fa-pencil-square-o" onclick="redactContact(' + n + ');" aria-hidden="true"></i> <i class="fa fa-trash-o" onclick="remuveS(' + n + ');" aria-hidden="true"></i></div>';
                 sts += '</div>';
                 sts += '<div class="formBottom">';
                 sts += '<div class="formSeredina">';
@@ -148,13 +156,9 @@
                 sts += '</div>';
                 sts += '<div class="formRight">';
                 sts += '<div class="windowPhone"><p>' + addressBook[n].phone + '</p> </div>';
-                // sts += '<div class="windowPhone1"><p>' + addressBook[n].phone1 + '</p></div>';
-                // sts += '<div class="windowPhone2"><p>' + addressBook[n].phone2 + '</p></div>';
                 sts += '<div class="windowCity"><p>' + addressBook[n].city + '</p></div>';
                 sts += '<div class="windowAddress"><p>' + addressBook[n].address + '</p></div>';
                 sts += '<div class="windowEmail"><p>' + addressBook[n].email + '</p></div>';
-                // sts += '<div class="windowEmail1"><p>' + addressBook[n].email1 + '</p></div>';
-                // sts += '<div class="windowEmail2"><p>' + addressBook[n].email2 + '</p></div>';
                 sts += '</div>';
                 sts += '<div class="formLeft">';
                 sts += '<div class="windowLeftPhone">Phone <i class="fa fa-phone" aria-hidden="true"></i></div>';
@@ -178,6 +182,38 @@
 
 
     }
+var indexSplice
+var stel = 0
+    function redactContact(nNum){
+        stel = 1;
+        show2('none');
+        show('block');
+
+        for (let i = 0; i < addressBook[nNum].phone.length - 1; i++) {
+            addPhoneF();
+        }
+        for (let i = 0; i < addressBook[nNum].phone.length; i++) {
+            document.getElementsByClassName('phoneForms')[i].value = addressBook[nNum].phone[i];
+        }
+
+        for (let i = 0; i < addressBook[nNum].email.length - 1; i++) {
+            addMailF();
+        }
+        for (let i = 0; i < addressBook[nNum].email.length; i++) {
+            document.getElementsByClassName('emailForms1')[i].value = addressBook[nNum].email[i]
+        }
+
+        fullname.value = addressBook[nNum].fullname;
+        address.value = addressBook[nNum].address;
+        city.value = addressBook[nNum].city;
+
+
+
+        indexSplice = nNum;
+
+    }
+
+
     
     let idContact = 0;
     function generatorId() {
@@ -198,13 +234,57 @@
 
     }
 
+    var resProverka;
+    function proverka() {
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const phoneReg = /^\d[\d\(\)\ -]{4,14}\d$/;
+    for (i = 0; i < phoneForms.length; i++) {
+            if (phone.value === '' || fullname.value==='' ) {
+                resProverka = false;
+                alert('Поле Phone и Name не могут быть пустыми');
+                break;
+            }
+        else if(phoneForms[i].value === ''){
+            resProverka = true;
+        }
+        else if (!phoneReg.test(phoneForms[i].value)) {
+            resProverka = false;
+            alert('Введите 6-12 цифер в поле номер');
+                break;
+        }
+        else {
+            resProverka = true;
+        }
+        for (j = 0; j < emailForms2.length; j++) {
+            if(emailForms2[j].value === ''){
+                resProverka = true;
+            }
 
-    let phoneForms = document.getElementsByClassName('phoneForms');
+            else if (!emailReg.test(emailForms2[j].value)) {
+                resProverka = false;
+                alert('Введите email в правильном формате');
+                break;
+            }
+            else {
+                resProverka = true;
+            }
+        }
+    }
+}
+
+
+
+
+    var phoneForms = document.getElementsByClassName('phoneForms');
     let emailForms2 = document.getElementsByClassName('emailForms1');
     function addToBook() {
-        
-        let isNull = fullname.value != '' && phone.value != '';
-        if (isNull) {
+
+        if (stel == 0){
+
+    
+        proverka();
+        // let isNull = fullname.value != '' && phone.value != '';
+        if (resProverka) {
             let phone = [];
             for (i = 0; i < phoneForms.length; i++) {
                 phone.push(phoneForms[i].value);
@@ -222,6 +302,38 @@
             clearForm();
 
             showAddressBook();
+
+
+
+        }
+        }
+        else {
+            proverka();
+
+            //addressBook.splice(s, 1);
+            
+            if (resProverka) {
+            let phone = [];
+            for (i = 0; i < phoneForms.length; i++) {
+                phone.push(phoneForms[i].value);
+            }
+
+            let email = [];
+            for (j = 0; j < emailForms2.length; j++) {
+                email.push(emailForms2[j].value);
+            }
+
+            let obj = new jsonStructure(idContact, fullname.value, phone, address.value, city.value, email);
+            addressBook.splice(indexSplice, 1, obj);
+            localStorage['addbook'] = JSON.stringify(addressBook);
+            show('none')
+            clearForm();
+            showAddressBook();
+
+
+
+        }
+
         }
     }
 
@@ -251,6 +363,15 @@
         for (let i in emailForms3) {
             emailForms3[i].value = '';  
         }
+
+        var additionalPhone = document.getElementById('additionalPhone');
+        var additionalMail = document.getElementById('additionalMail');
+        additionalMail.innerHTML = '';
+        additionalPhone.innerHTML = '';
+
+
+        xs = 0; //couners
+        xd = 0;
     }
 
     function showAddressBook() {

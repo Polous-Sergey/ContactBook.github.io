@@ -6,6 +6,9 @@ h1 {
     font-family: 'Slabo 27px', serif;
     font-weight: normal;
 }
+input: invalid {
+    color: red;
+}
 
 .container {
     width: 960px;
