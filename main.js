@@ -47,13 +47,13 @@
     function addPhoneF() {
         var addPhone = document.getElementById('additionalPhone');
         xs++;
-        if (xs < 3) {
+        if (xs < 4) {
             let newdiv = document.createElement('div');
             newdiv.innerHTML = '<input type="text" maxlength="12" class="formFields, phoneForms"> <br>';
             addPhone.appendChild(newdiv);
         }
         else {
-            alert('2social4me');
+            alert('Превышино максимальное количество полей');
         }
 
     }
@@ -65,13 +65,13 @@
     function addMailF() {
         let addMail = document.getElementById('additionalMail');
         xd++;
-        if (xd < 3) {
+        if (xd < 4) {
             let newdivMail = document.createElement('div');
             newdivMail.innerHTML = '<input type="text"  class="formFields, emailForms1"><br>';
             addMail.appendChild(newdivMail);
         }
         else {
-            alert('2social4me');
+            alert('Превышино максимальное количество полей');
         }
     }
 
@@ -423,8 +423,20 @@ var stel = 0
      });
      // alert(JSON.stringify(serchResArr));
 
-     show3('block');
-     showSerchRes();
+     if (serchResArr.length > 0) {
+        show3('block');
+        showSerchRes();
+     }
+     else {
+        alert('Поиск не дал результатов')
+     }
+
+
+     
+
+
+
+
     }
 }
     var addSearch = document.querySelector('.widowDataSearch');

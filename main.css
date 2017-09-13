@@ -275,6 +275,6 @@ input: invalid {
     height: fit-content;
     top: 22%;
     left: 11.75%;
-    z-index: 2;
+    z-index: 1;
     border-radius: 3px;
 }
